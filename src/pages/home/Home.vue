@@ -3,17 +3,17 @@
     <home-header> </home-header>
     <home-headlines></home-headlines>
     <div class="center-left">
-      <home-cube :title="titlelist[0]" :list="list" :urls="urls" :listurl="listurl"></home-cube>
+      <home-cube :title="titlelist[0]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
       <div class="xx">xx</div>
-      <home-cube :title="titlelist[1]" :list="list" :urls="urls" :listurl="listurl"></home-cube>
+      <home-cube :title="titlelist[1]" :list="goodthings" :urls="urls" :listurl="listurl"></home-cube>
     </div>
     <div class="center-center">
       <home-center></home-center>
     </div>
     <div class="center-right">
-<home-cube :title="titlelist[2]" :list="list" :urls="urls" :listurl="listurl"></home-cube>
+<home-cube :title="titlelist[2]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
       <div class="xx">xx</div>
-      <home-cube :title="titlelist[3]" :list="list" :urls="urls" :listurl="listurl"></home-cube>
+      <home-cube :title="titlelist[3]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
     </div>
     <home-bottom></home-bottom>
     <creater-info></creater-info>
@@ -27,7 +27,7 @@ import HomeCube from "./components/SmallCube";
 import HomeCenter from "./components/HomeCenter";
 import HomeBottom from './components/HomeBottom';
 import CreaterInfo from './components/CreaterInfo';
-import axios from 'axios'; 
+import {postTest,getNineAnnouncement,getNineGoodthings} from 'apis/list'; //引入基本的post和get方法
 export default {
   name: "Home",
   components: {
@@ -47,39 +47,44 @@ export default {
       goodthings:[],         //好人好事集合
       publicactivity:[],     //公益活动集合
       urls:["//www.baidu.com","#","#"],
-      listurl:"#"
+      listurl:"#",
+      objData:{username:"sakura"},
+      list:[]
     };
   },
   methods:{
     //初始化函数
-    init(){},
-    //获取titlelist，其实不用获取也行..(就在data里面写死了)
-    getTitle(){return null;},
-    //获取公告的内容list,此处没有封装好底层post和get的函数，而且用户的token也没有考虑
-    getAnnouncementList(){
-      axios.get('api地址',{params:{}})
-      .then()
-      .catch(error=>{console.log(error)})
+    init(){
+      this.getAnn()
+      this.getGoo()
+    }, 
+    //获取公告
+    getAnn(){
+       getNineAnnouncement().then(res=>{
+        console.log("返回的data是",res)
+        this.announcementlist = res.data
+        }
+        ).catch(err=>{console.log(err)})
     },
-    //公益超链接内容
-    getPublicconnectList(){
-       axios.get('api地址',{params:{}})
-      .then()
-      .catch(error=>{console.log(error)})
-    },
-    //好人好事内容
-    getGoodthingsList(){
-       axios.get('api地址',{params:{}})
-      .then()
-      .catch(error=>{console.log(error)})
-    },
-    //活动内容
-    getPublicactivityList(){
-       axios.get('api地址',{params:{}})
-      .then()
-      .catch(error=>{console.log(error)})
-    }
+    //获取公益连接
+    getPubc(){
 
+    },
+    //获取好人好事
+    getGoo(){
+       getNineGoodthings().then(res=>{
+         console.log("good的res是",res)
+         this.goodthings = res.data
+       }).catch(err=>{console.log(err)})
+    },
+    //获取公益活动
+    getPubl(){
+
+    },
+    //处理超链接
+    getHref(){
+
+    }
   },
   mounted(){
       this.init()

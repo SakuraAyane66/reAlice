@@ -4,12 +4,11 @@
       <div class="more"><a :href="listurl">更多</a></div>
       <h2 class="h2">{{ title }}</h2>
       <hr class="hr" />
+      <!-- vue单页面内跳转用路由 -->
       <ul>
-        <li class="li" v-for="(item, index) of list" :key="index">
-          <a :href="urls[index]">
-            {{ item }}
-          </a>
-        </li>
+        <router-link tag="li" :to="'/xianshi/'+item.db+'/'+item.id" class="li" v-for="item of list" :key="item.id">
+            {{ item.topic }}
+        </router-link>
       </ul>
     </div>
   </div>
@@ -46,6 +45,9 @@ export default {
     getMsg() {
       console.log("从父组件传递来的值是", this.msg);
     },
+    getList(){
+      console.log("从父组件传递来的list值是",this.list)
+    }
   },
 };
 </script>

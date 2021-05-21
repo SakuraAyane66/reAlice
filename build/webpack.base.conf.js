@@ -27,7 +27,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'imgs':resolve('src/assets/imgs'),
+      'imgs':resolve('src/assets/imgs'), //图片地址
+      'apis':resolve('src/common/api'),  //接口list地址
     }
   },
   module: {
