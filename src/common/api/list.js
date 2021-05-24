@@ -18,9 +18,12 @@ export const postUserLogin =(data)=> basePost(pre+ctx+"login",data);
 //获取各种接口相关内容
 
 //获取首页展示的9条记录
-export const getNineAnnouncement = ()=>baseGet(pre+ctx+"getNineAnnouncement");
+export const getNineAnnouncement = ()=>baseGet(pre+ctx+"getNineAnnouncement")
 export const getNineGoodthings = ()=>baseGet(pre+ctx+"getNineGoodthings")
+export const getNinePublicconnects = ()=>baseGet(pre+ctx+"getNinePublicconnect")
+export const getNincePublicActivitys = ()=>baseGet(pre+ctx+"getNinePublicactivity")
 
+//获取全部内容
 export const getAnnouncementList =()=>baseGet();  //获取全部公告
 export const getGoodthingsList =()=>baseGet(); //获取全部好人好事
 export const getPublicconnectList = ()=>baseGet(); //获取全部公益连接

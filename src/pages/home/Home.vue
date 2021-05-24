@@ -11,9 +11,9 @@
       <home-center></home-center>
     </div>
     <div class="center-right">
-<home-cube :title="titlelist[2]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
+      <home-pub :title="titlelist[2]" :list="publicconnect" :urls="urls" :listurl="listurl"></home-pub>
       <div class="xx">xx</div>
-      <home-cube :title="titlelist[3]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
+      <home-cube :title="titlelist[3]" :list="publicactivity" :urls="urls" :listurl="listurl"></home-cube>
     </div>
     <home-bottom></home-bottom>
     <creater-info></creater-info>
@@ -27,7 +27,9 @@ import HomeCube from "./components/SmallCube";
 import HomeCenter from "./components/HomeCenter";
 import HomeBottom from './components/HomeBottom';
 import CreaterInfo from './components/CreaterInfo';
-import {postTest,getNineAnnouncement,getNineGoodthings} from 'apis/list'; //引入基本的post和get方法
+import HomePub from './components/SmallCubePubc';
+import {postTest,getNineAnnouncement,getNineGoodthings,
+getNinePublicconnects,getNincePublicActivitys} from 'apis/list'; //引入基本的post和get方法
 export default {
   name: "Home",
   components: {
@@ -36,7 +38,8 @@ export default {
     HomeCube,
     HomeCenter,
     HomeBottom,
-    CreaterInfo
+    CreaterInfo,
+    HomePub
   },
   data() {
     //参考之前的代码写的逻辑，hhh，重构的难度还是无语呀
@@ -57,6 +60,8 @@ export default {
     init(){
       this.getAnn()
       this.getGoo()
+      this.getPubc() //公益连接
+      this.getPubl() //公益活动
     }, 
     //获取公告
     getAnn(){
@@ -68,7 +73,12 @@ export default {
     },
     //获取公益连接
     getPubc(){
-
+       getNinePublicconnects().then(
+         res=>{
+           console.log("connect返回的data是",res)
+           this.publicconnect = res.data
+         }
+       ).catch(err=>{console.log(err)})
     },
     //获取好人好事
     getGoo(){
@@ -79,7 +89,10 @@ export default {
     },
     //获取公益活动
     getPubl(){
-
+       getNincePublicActivitys().then(res=>{
+        console.log("公益活动返回的data是",res)
+        this.publicactivity = res.data
+       }).catch(err=>{console.log(err)})
     },
     //处理超链接
     getHref(){
