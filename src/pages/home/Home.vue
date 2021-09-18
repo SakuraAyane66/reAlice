@@ -66,7 +66,6 @@ export default {
     //获取公告
     getAnn(){
        getNineAnnouncement().then(res=>{
-        console.log("返回的data是",res)
         this.announcementlist = res.data
         }
         ).catch(err=>{console.log(err)})
@@ -75,7 +74,6 @@ export default {
     getPubc(){
        getNinePublicconnects().then(
          res=>{
-           console.log("connect返回的data是",res)
            this.publicconnect = res.data
          }
        ).catch(err=>{console.log(err)})
@@ -83,14 +81,12 @@ export default {
     //获取好人好事
     getGoo(){
        getNineGoodthings().then(res=>{
-         console.log("good的res是",res)
          this.goodthings = res.data
        }).catch(err=>{console.log(err)})
     },
     //获取公益活动
     getPubl(){
        getNincePublicActivitys().then(res=>{
-        console.log("公益活动返回的data是",res)
         this.publicactivity = res.data
        }).catch(err=>{console.log(err)})
     },

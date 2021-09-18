@@ -5,10 +5,13 @@
       <h2 class="h2">{{ title }}</h2>
       <hr class="hr" />
       <!-- vue单页面内跳转用路由 -->
-      <ul>
-        <router-link tag="li" :to="'/xianshi/'+item.db+'/'+item.id" class="li" v-for="item of list" :key="item.id">
+      <ul id="tt">
+        <!-- <router-link tag="li" :to="item.hyperlink" class="li" v-for="item of list" :key="item.id">
             {{ item.topic }}
-        </router-link>
+        </router-link> -->
+        <a v-for="item of list" :key="item.id" :href="item.hyperlink" target="_blank">
+            <li class="li">{{ item.topic }}</li>
+        </a>
       </ul>
     </div>
   </div>
@@ -91,9 +94,15 @@ export default {
 .li {
   margin-left: 20px;
   margin-top: 15px;
+  color: black;
   white-space: nowrap;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis; /*溢出用省略号*/
   overflow: hidden;
 }
+/* #tt a:hover{
+  color:#00CCFF;
+  font-size: 200%;
+  /*text-decoration-line: underline;/*修改为有下划线
+} */
 </style>

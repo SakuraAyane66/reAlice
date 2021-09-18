@@ -25,17 +25,17 @@ export function baseGet(url, params) {
  * @param {Object} params [请求时携带的参数]
  */
 export function basePost(url, params) {
-  console.log("传入进来的url是：------",url)
-  console.log("传入到基本post里面的data是:-----",params)
+  // console.log("传入进来的url是：------",url)
+  // console.log("传入到基本post里面的data是:-----",params)
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
       .then(res => {
-        console.log("这是基本post封装里面接收到的数据",res)
+        // console.log("这是基本post封装里面接收到的数据",res)
         resolve(res.data);
       })
       .catch(err => {
-        console.log("这是基本post封装里面的err",err)
+        // console.log("这是基本post封装里面的err",err)
         reject(err.data);
       });
   });

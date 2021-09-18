@@ -4,7 +4,7 @@ import {baseGet,basePost,tett} from '../utils/baseRequest'; //引入base请求
 //此处还没有进行拦截请求和请求头加token等信息
 
 //网址的地址，方便以后更换
-const pre = "http://localhost:8080/";
+const pre = "http://localhost/";
 const ctx = "alice/";
 
 //测试接口
