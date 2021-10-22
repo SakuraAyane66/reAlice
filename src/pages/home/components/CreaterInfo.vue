@@ -1,14 +1,11 @@
 <template>
   <div class="bottom">
     <a href="http://beian.miit.gov.cn/" target="_blank"
-      ><p>渝ICP备19006881号</p></a
-    >
+      ><p>渝ICP备19006881号</p></a>
     <p>作者: 陈天龙</p>
     <p>学校:西南大学</p>
     <p>作者联系方式：a809653361@icloud.com</p>
-    <p>
-      举报虚假信息:<a href="#">举报链接</a>
-    </p>
+    <p>举报虚假信息:<a href="#">举报链接</a></p>
   </div>
 </template>
 

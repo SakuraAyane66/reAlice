@@ -1,11 +1,11 @@
 <template>
-  <div class="center-top">
+  <div class="center-top" id="center-top">
     <img :src="imgUrl" alt="图片" />
     <h1 style="text-align: center">头条内容</h1>
   </div>
 </template>
 
-<script>
+<script scoped>
 import imgUrl from "imgs/4.png";
 export default {
   name: "HomeHeadlines",
@@ -24,7 +24,6 @@ export default {
 /* @import "~imgs/4.png"; */
 h1 {
   color: red;
-  /* margin-top: 10px; */
   font-size: 30px;
 }
 .center-top {

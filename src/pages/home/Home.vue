@@ -17,6 +17,7 @@
     </div>
     <home-bottom></home-bottom>
     <creater-info></creater-info>
+    <login></login>
   </div>
 </template>
 
@@ -28,8 +29,10 @@ import HomeCenter from "./components/HomeCenter";
 import HomeBottom from './components/HomeBottom';
 import CreaterInfo from './components/CreaterInfo';
 import HomePub from './components/SmallCubePubc';
+import Login from '@/pages/common/Login.vue';
 import {postTest,getNineAnnouncement,getNineGoodthings,
 getNinePublicconnects,getNincePublicActivitys} from 'apis/list'; //引入基本的post和get方法
+
 export default {
   name: "Home",
   components: {
@@ -39,7 +42,8 @@ export default {
     HomeCenter,
     HomeBottom,
     CreaterInfo,
-    HomePub
+    HomePub,
+    Login,
   },
   data() {
     //参考之前的代码写的逻辑，hhh，重构的难度还是无语呀
@@ -52,7 +56,7 @@ export default {
       urls:["//www.baidu.com","#","#"],
       listurl:"#",
       objData:{username:"sakura"},
-      list:[]
+      list:[],
     };
   },
   methods:{
@@ -67,6 +71,7 @@ export default {
     getAnn(){
        getNineAnnouncement().then(res=>{
         this.announcementlist = res.data
+        this.putDbn(this.announcementlist,1)
         }
         ).catch(err=>{console.log(err)})
     },
@@ -82,17 +87,26 @@ export default {
     getGoo(){
        getNineGoodthings().then(res=>{
          this.goodthings = res.data
+         this.putDbn(this.goodthings,3)
        }).catch(err=>{console.log(err)})
     },
     //获取公益活动
     getPubl(){
        getNincePublicActivitys().then(res=>{
         this.publicactivity = res.data
+        this.putDbn(this.publicactivity,4)
        }).catch(err=>{console.log(err)})
     },
     //处理超链接
     getHref(){
 
+    },
+    //给每个返回给前端的list添加db识别（判断在detail显示中查找哪一个对应的api）
+    //恩的思路是通过db在服务器处理，这里还是保留在前端处理，因为页面基本不会改变
+    putDbn(list,dbNumber){  //list是传入的数组，number是需要赋值的dbn
+        for(let i=0;i<list.length;i++){
+            list[i].db = dbNumber;
+        }
     }
   },
   mounted(){

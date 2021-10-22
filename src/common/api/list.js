@@ -29,6 +29,11 @@ export const getGoodthingsList =()=>baseGet(); //获取全部好人好事
 export const getPublicconnectList = ()=>baseGet(); //获取全部公益连接
 export const getPublicactivityList = ()=>baseGet(); //获取全部公益活动
 
+//获取具体内容，各个topic下面的
+export const getAnnouncementDetails = (id)=>basePost(pre+ctx+"getAnnouncementById",id); //db标识1
+export const getGoodthingDetails = (id)=>basePost(pre+ctx+"getGoodthingsById",id);      //db标识3
+export const getPublicconnectDetails = (id)=>basePost(pre+ctx+"getPubById",id);         //db标识2，但是这个基本上不用，因为超链接
+export const getPublicActivityDetails = (id)=>basePost(pre+ctx+"getPublicactivityById",id);  //db标识4
 
 //  //获取titlelist，其实不用获取也行..(就在data里面写死了)
 //  getTitle(){return null;},

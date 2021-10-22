@@ -1,9 +1,6 @@
 <template>
   <div class="header">
-    <router-link :to="{name:'Home'}"><div class="top">首页</div></router-link>
-    <div class="top"><a href="#center-top">头条内容</a></div>
-    <div class="top"><a href="#center-center">公益快讯</a></div>
-    <div class="top"><a href="#">站内搜索</a></div>
+    <router-link :to="{name:'Home'}"><div class="top">返回首页</div></router-link>
     <div v-if="login">
       <li class="top-last">
         <button class="login"><a href=""> 退出登录 </a></button>
@@ -21,7 +18,7 @@
 
 <script>
 export default {
-  name: "HomeHeader",
+  name: "OtherHeader",
   //props从父组件获取内容
   props: {},
   //返回的data

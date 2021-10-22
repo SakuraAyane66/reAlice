@@ -32,6 +32,10 @@ export function basePost(url, params) {
       .post(url, params)
       .then(res => {
         // console.log("这是基本post封装里面接收到的数据",res)
+        //统一处理？
+        // if(res.code!=200){
+        //     reject(res.msg)
+        // }
         resolve(res.data);
       })
       .catch(err => {

@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="center-left-top">
+    <div class="center-left-top" id="center-center">
       <div class="more"><a :href="listurl">更多</a></div>
       <h2 class="h2">{{ title }}</h2>
       <hr class="hr" />
       <!-- vue单页面内跳转用路由 -->
       <ul>
-        <router-link tag="li" :to="'/xianshi/'+item.db+'/'+item.id" class="li" v-for="item of list" :key="item.id">
+        <!-- <router-link tag="li" :to="'/xianshi/'+'db='+item.db+'&id='+item.id" class="li" v-for="item of list" :key="item.id"> -->
+        <router-link tag="li" :to="{name:'Detail',query:{db:item.db,id:item.id}}" class="li" v-for="item of list" :key="item.id">   
             {{ item.topic }}
         </router-link>
       </ul>

@@ -1,6 +1,7 @@
 <template>
     <!--登录界面主体-->
 <div class="modal" v-show="isShow">
+    
    <form class="modal-content animate">
     <div class="imgcontainer">
       <span @click="changeNone" class="close" title="Close Modal">
@@ -25,13 +26,20 @@
 </template>
 
 <script>
-import imgUrl from "imgs/4.png";
+import imgUrl from "imgs/login.jpg";
 import {postUserLogin} from "apis/list";
 export default {
     name: "Login",
+    //props从父组件获取内容
+    props:{
+        //是否显示
+        isShow:{
+            typeof:Boolean,
+            default:false
+        },
+    },
     data(){
         return{
-          isShow:true,
           imgUrl:imgUrl,
           user:"",
           password:""
@@ -50,6 +58,7 @@ export default {
         },
         //发送登录请求
         login(){
+            console.log("至少发起了请求！！")
             let data = {
                 "username":this.user,
                 "clearPassword":this.password
@@ -59,20 +68,21 @@ export default {
                 //登录逻辑处理
                 console.log("res??",res)
             })
-            .catch(res=>{console.log(res)})
+            .catch(res=>{
+                console.log(res)}
+                )
         }
-
     }
 }
 </script>
 
-<style>
+<style scoped>
 
 /* 登录界面默认模版，一般隐藏*/
 .modal {
     /*display: none; /* 默认隐藏 */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
