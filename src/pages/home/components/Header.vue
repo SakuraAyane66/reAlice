@@ -4,7 +4,7 @@
     <div class="top"><a href="#center-top">头条内容</a></div>
     <div class="top"><a href="#center-center">公益快讯</a></div>
     <div class="top"><a href="#">站内搜索</a></div>
-    <div v-if="login">
+    <div v-if="$store.state.isLogin">
       <li class="top-last">
         <button class="login"><a href=""> 退出登录 </a></button>
       </li>
@@ -16,6 +16,7 @@
       <li class="top-last"><button class="login" onclick="">注册</button></li>
       <li class="top-last"><button class="login" onclick="">登录</button></li>
     </div>
+    <!-- <button @click="loginDD()">点击</button> -->
   </div>
 </template>
 
@@ -27,8 +28,23 @@ export default {
   //返回的data
   data() {
     return {
-      login: false,
+     
     };
+  },
+  computed:{
+    //可以在js中得到Vuex中的值
+    // getLogin(){
+    //   return this.$store.state.isLogin
+    // }
+  },
+  methods:{
+      loginDD(){
+        //调用vuex中的mutations方法，commit括号内是方法名
+        this.$store.commit("logIn")
+      }
+  },
+  mounted(){
+
   },
 };
 </script>

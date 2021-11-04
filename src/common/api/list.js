@@ -35,6 +35,9 @@ export const getGoodthingDetails = (id)=>basePost(pre+ctx+"getGoodthingsById",id
 export const getPublicconnectDetails = (id)=>basePost(pre+ctx+"getPubById",id);         //db标识2，但是这个基本上不用，因为超链接
 export const getPublicActivityDetails = (id)=>basePost(pre+ctx+"getPublicactivityById",id);  //db标识4
 
+//搜索接口,用于search界面的搜索功能
+export const getKeyword  = (keyword) =>basePost(pre+ctx+"getAllKeyword",keyword)
+
 //  //获取titlelist，其实不用获取也行..(就在data里面写死了)
 //  getTitle(){return null;},
 //  //获取公告的内容list,此处没有封装好底层post和get的函数，而且用户的token也没有考虑

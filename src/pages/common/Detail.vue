@@ -5,8 +5,13 @@
     <div class="center">
       <li class="center-first">文章内容</li>
       <!--搜索栏-->
-      <div class="searchbox-last" onclick="isGoto()">搜索</div>
-      <input type="text" class="search" placeholder="请输入关键字" />
+      <div class="searchbox-last" v-on:click="isGoto">搜索</div>
+      <input
+        type="text"
+        class="search"
+        placeholder="请输入关键字"
+        v-model="keyword"
+      />
     </div>
     <hr />
 
@@ -34,12 +39,14 @@
       </div>
     </div>
     <home-bottom></home-bottom>
+    <creater-info></creater-info>
   </div>
 </template>
 
 <script>
-import OtherHeader from "../home/components/OtherHeader.vue"
+import OtherHeader from "../home/components/OtherHeader.vue";
 import HomeBottom from "../home/components/HomeBottom.vue";
+import CreaterInfo from "../home/components/CreaterInfo.vue";
 import { tsFormat } from "@/common/utils/time/formatTime.js";
 import {
   getAnnouncementDetails,
@@ -54,6 +61,7 @@ export default {
   components: {
     OtherHeader,
     HomeBottom,
+    CreaterInfo,
   },
   name: "Detail",
   data() {
@@ -66,6 +74,7 @@ export default {
         time: "",
         author: "",
       },
+      keyword: "", //seach关键字
     };
   },
   created() {},
@@ -114,6 +123,20 @@ export default {
         default:
           console.log("其他，不执行任何操作");
           break;
+      }
+    },
+    isGoto:function() {
+      console.log("dd")
+      if (this.keyword != null && this.keyword != "") {
+        this.$router.push({
+          path: "/Search",
+          query: {
+            keyword: this.keyword,
+          },
+        });
+      } else {
+        //或者在这里进行升级，改为全局的弹窗警示效果，应该有现成的代码可以复用
+        alert("关键词不能为空！");
       }
     },
   },
