@@ -4,12 +4,12 @@
         <a href="javascript:void(0);" v-show="showPrevPage" v-on:click="prevPage" >上一页</a>
         <a href="javascript:void(0);" v-show="showNextPage" v-on:click="nextPage" >下一页</a>
         <a href="javascript:void(0);" v-show="showLastPage" v-on:click="lastPage" >尾页</a>
+        
         <div>
             <select v-model="rowNum">
+                <option selected="selected" value="5">5</option>
                 <option value="10">10</option>
-                <option selected="selected" value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                <option value="15">15</option>
             </select>
         </div>      
         <span>{{curPage}}/{{total}}</span>
@@ -26,14 +26,17 @@ export default {
         this.$nextTick(() => { this.initPager() }) //需要延迟初始化
     },
     name: 'Pager',
+    props:[
+        "pageSize","curPage","total"
+    ],
     data () {
         return {
             "gotoPage":"",
-            "showFirstPage":true,
-            "showLastPage":true,
-            "showPrevPage":true,
-            "showNextPage":true,
-            "rowNum":this.pageSize
+            showFirstPage:true,
+            showLastPage:true,
+            showPrevPage:true,
+            showNextPage:true,
+            rowNum:this.pageSize
         }
     },
     methods:{
@@ -46,13 +49,16 @@ export default {
         gotoNextPage(){//跳转页面
             if(this.gotoPage && /[1-9][0-9]*/.test(this.gotoPage)){             
                 var pg = parseInt(this.gotoPage)
-                if(pg > 0 && pg <= this.pageSize){
+                //大于0 且小于等于总页数，
+                if(pg > 0 && pg <= this.total){
                     this.$emit('setPage', pg ) //调用父组件方法
                 }else{
                     this.gotoPage = ""
+                    alert("请输入合理的页面")
                 }
             }else{
                 this.gotoPage = ""
+                alert("请输入合理的页面")
             }
         },      
         firstPage(){
@@ -65,18 +71,17 @@ export default {
             this.$emit('setRowNum', this.rowNum )
         },
         initPager(){
-            this.showFirstPage = this.curPage> 1
+            this.showFirstPage = this.curPage> 1 
             this.showLastPage = this.curPage< this.total
             this.showPrevPage = this.curPage> 1
             this.showNextPage = this.curPage< this.total
-            this.gotoPage = ""
+            this.gotoPage = ""   
         }
     },
-    props:[
-        "pageSize","curPage","total"
-    ],
     watch:{
-        'rowNum':'rowNumChanged' //监控rowNum
+        'rowNum':'rowNumChanged', //监控rowNum
+        'curPage': 'initPager',
+        'pageSize' : "initPager"  
     }
 }
 </script>

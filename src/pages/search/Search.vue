@@ -19,13 +19,13 @@
         tag="li"
         :to="{ name: 'Detail', query: { db: item.db, id: item.id } }"
         class="li"
-        v-for="(item, index) of otherItems"
+        v-for="(item, index) of showOtherItems"
         :key="index"
       >
         {{ item.topic }}
       </router-link>
       <a
-        v-for="item of urlItems"
+        v-for="item of showUrlItems"
         :key="item.id"
         :href="item.hyperlink"
         target="_blank"
@@ -36,7 +36,7 @@
         v-if="!dataChanged"
         ref="pager"
         :pageSize="pageSize"
-        :page="curPage"
+        :curPage="curPage"
         :total="total"
         @setPage="gotoPage"
         @setRowNum="changeRowNum"
@@ -72,7 +72,7 @@ export default {
       dataLength:0, //总共的数据条数
       curPage: 1, //当前页
       total: 0, //总共页数
-      pageSize: 20, //每页记录数
+      pageSize: 18, //每页记录数,默认18条
       dataChanged: false, //前端分页组件data
       showUrlItems:[], //前端分页展示的超链接内容
       showOtherItems:[] ,//前端分页展示的超链接内容
@@ -108,7 +108,6 @@ export default {
           AnnouncementItems = getData[0].Announcement;
           GoodthingsItems = getData[1].Goodthings;
           PublicactivityItems = getData[2].Publicactivity;
-          console.log("type?",typeof(getData[3].Publicconnect))
           this.urlItems = getData[3].Publicconnect;
           //循环
           for (let i = 0; i < AnnouncementItems.length; i++) {
@@ -129,8 +128,8 @@ export default {
             return;
           }
           //总共数据数量
-          this.dataLength = Object.keys(this.urlItems).length+this.otherItems.length
-          this.total = Math.ceil(this.dataChanged/this.pageSize)
+          this.dataLength = Object.keys(this.urlItems).length+this.otherItems.length  
+          this.total = Math.ceil(this.dataLength/this.pageSize) //总共页数
           this.gotoPage(1) //到首页
         });
       }
@@ -143,10 +142,15 @@ export default {
         alert("关键词不能为空！");
       }
     },
-    //文字分页，不带图片的内容
+    //文字分页，不带图片的内容,切换show数组控制显示
     gotoPage(pageNumber){
-      let m = this.otherItems / this.pageSize ;//得到前m页都是others
-      let n = this.otherItems % this.pageSize;//得到余数 ，交换页的前n个是others
+      if(pageNumber<0 || pageNumber>this.total){
+            this.gotoPage(1);
+            return;
+      }
+      this.curPage = pageNumber; //切换显示的页码
+      let m = Math.floor(this.otherItems.length / this.pageSize) ;//得到前m页都是others,向下取整
+      let n = this.otherItems.length % this.pageSize;//得到余数 ，交换页的前n个是others
       //切换的page在前m页
       if(pageNumber<=m){
         //从otherItems中截取对应的数据放到show里面
@@ -157,6 +161,7 @@ export default {
       if(pageNumber==(m+1)){
         this.showOtherItems = this.otherItems.slice(m*this.pageSize) //截取剩下的所有内容，小于n
         this.showUrlItems = this.urlItems.slice(0,this.pageSize-n) //不足pagesize的用url补充
+        return;
       }
       if(pageNumber>m+1){
         //只有urlItems了,
@@ -165,9 +170,13 @@ export default {
         return;
       }
     },
-    changeRowNum(){},
-    setPage(){}
-
+    changeRowNum(rowNum){
+      this.pageSize = rowNum; //更改this.pageSize 
+      this.total = Math.ceil(this.dataLength/this.pageSize) //更新总页数
+      //更改pageSize之后需要重新加载Page页面（总页数，当前页显示等等都可能变化）
+      this.gotoPage(1) //重新加载
+      this.$refs.pager.initPager();
+    },
   },
   mounted() {
     this.init();
