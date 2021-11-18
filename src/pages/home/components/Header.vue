@@ -13,8 +13,8 @@
       </li>
     </div>
     <div v-else>
-      <li class="top-last"><button class="login" onclick="">注册</button></li>
-      <li class="top-last"><button class="login" onclick="">登录</button></li>
+      <li class="top-last"><button class="login" @click="changeCreateShow()">注册</button></li>
+      <li class="top-last"><button class="login" @click="changeLoginShow()">登录</button></li>
     </div>
     <!-- <button @click="loginDD()">点击</button> -->
   </div>
@@ -41,6 +41,12 @@ export default {
       loginDD(){
         //调用vuex中的mutations方法，commit括号内是方法名
         this.$store.commit("logIn")
+      },
+      changeLoginShow(){
+        this.$emit("changeLoginShow")
+      },
+      changeCreateShow(){
+        this.$emit("changeCreateShow")
       }
   },
   mounted(){

@@ -10,7 +10,8 @@ let store = new Vuex.Store({
     isLogin: false,
     name: "Sakura",
     arr:[],
-    obj:{}
+    obj:{},
+    token:"", //登录凭证token
   },
   //状态变更方法，只能在这里调用
   mutations: {
@@ -19,6 +20,9 @@ let store = new Vuex.Store({
     },
     logIn(state) {
       state.isLogin = true
+    },
+    setToken(state,xxx){
+      state.token = xxx
     }
   },
   //允许异步执行的代码，ajax，axios

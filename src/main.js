@@ -12,12 +12,14 @@ import store from './store/index'
 // import 'swiper/css/swiper.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import Msg from './common/utils/commonJs/msg'
 // import VueLazyLoad from 'vue-lazyload'
 // import echarts from 'echarts'/* 全部引入体积过大，按需引入 */
 
 // Vue.prototype.$echarts = echarts
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.use(Msg)
 // fastClick.attach(document.body)
 // Vue.use(VueAwesomeSwiper /* { default options with global component } */)
 // Vue.use(VueLazyLoad, {

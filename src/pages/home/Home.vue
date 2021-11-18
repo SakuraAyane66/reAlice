@@ -1,6 +1,6 @@
 <template>
   <div>
-    <home-header> </home-header>
+    <home-header @changeCreateShow="changeCreateShow" @changeLoginShow="changeLoginShow"> </home-header>
     <home-headlines></home-headlines>
     <div class="center-left">
       <home-cube :title="titlelist[0]" :list="announcementlist" :urls="urls" :listurl="listurl"></home-cube>
@@ -17,7 +17,8 @@
     </div>
     <home-bottom></home-bottom>
     <creater-info></creater-info>
-    <login></login>
+    <login :isShow="loginShow" @changeLoginNone="changeLoginNone" @changeToCreate="changeToCreate"></login>
+    <create :isShow="createShow" @changeCreateNone="changeCreateNone"> </create>
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import HomeBottom from './components/HomeBottom';
 import CreaterInfo from './components/CreaterInfo';
 import HomePub from './components/SmallCubePubc';
 import Login from '@/pages/common/Login.vue';
+import Create from '@/pages/common/Create.vue';
 import {postTest,getNineAnnouncement,getNineGoodthings,
 getNinePublicconnects,getNincePublicActivitys} from 'apis/list'; //引入基本的post和get方法
 
@@ -44,6 +46,7 @@ export default {
     CreaterInfo,
     HomePub,
     Login,
+    Create
   },
   data() {
     //参考之前的代码写的逻辑，hhh，重构的难度还是无语呀
@@ -57,6 +60,8 @@ export default {
       listurl:"#",
       objData:{username:"sakura"},
       list:[],
+      loginShow: false, //登录页面是否显示，默认为false，现在是查看是否改变
+      createShow: false, //注册页面是否显示，默认为false
     };
   },
   methods:{
@@ -107,10 +112,34 @@ export default {
         for(let i=0;i<list.length;i++){
             list[i].db = dbNumber;
         }
+    },
+    //显示login界面
+    changeLoginShow(){
+      this.loginShow = true;
+    },
+    //显示create界面
+    changeCreateShow(){
+      this.createShow = true;
+    },
+    //隐藏login界面
+    changeLoginNone(){
+      this.loginShow = false;
+    },
+    //隐藏create界面
+    changeCreateNone(){
+      this.createShow = false;
+    },
+    changeToCreate(){
+      this.loginShow =false;
+      this.createShow = true;
     }
   },
   mounted(){
       this.init()
+  },
+  watch:{
+    // "loginShow":"change",
+    // "createShow":"change",
   }
 };
 </script>

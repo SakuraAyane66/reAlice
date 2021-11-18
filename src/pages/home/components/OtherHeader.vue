@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <router-link :to="{name:'Home'}"><div class="top">返回首页</div></router-link>
-    <div v-if="login">
+    <!-- <div v-if="login">
       <li class="top-last">
         <button class="login"><a href=""> 退出登录 </a></button>
       </li>
@@ -12,7 +12,7 @@
     <div v-else>
       <li class="top-last"><button class="login" onclick="">注册</button></li>
       <li class="top-last"><button class="login" onclick="">登录</button></li>
-    </div>
+    </div> -->
   </div>
 </template>
 
