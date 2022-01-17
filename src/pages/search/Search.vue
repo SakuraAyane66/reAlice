@@ -205,6 +205,13 @@ export default {
   text-overflow: ellipsis; /*溢出用省略号*/
   overflow: hidden;
 }
+li.center-first {
+  float: left;
+  margin-left: 5%;
+  margin-top: 5px;
+  font-size: 25px;
+  list-style-type: none;
+}
 .searchbox {
   display: inline;
   float: right;
