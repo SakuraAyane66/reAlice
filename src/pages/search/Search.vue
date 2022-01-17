@@ -124,8 +124,10 @@ export default {
             this.otherItems.length == 0
           ) {
             //可优化为全局弹窗
-            alert("没有搜索到相关内容，请重新输入点什么搜索");
-            return;
+            alert("没有搜索到相关内容，请重新输入点什么搜索"); //清空展示数据
+             this.showUrlItems=[]; //前端分页展示的超链接内容
+             this.showOtherItems=[];//前端分页展示的超链接内容
+             return;
           }
           //总共数据数量
           this.dataLength = Object.keys(this.urlItems).length+this.otherItems.length  
@@ -178,8 +180,11 @@ export default {
       this.$refs.pager.initPager();
     },
   },
+  activated(){
+     this.init();
+  },
   mounted() {
-    this.init();
+    // this.init();
   },
 };
 </script>

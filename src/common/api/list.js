@@ -1,6 +1,8 @@
 
 //发起请求调用api的list地址，都是从这里调用，方便管理
 import {baseGet,basePost,tett} from '../utils/baseRequest'; //引入base请求
+import axios from 'axios';
+import Qs from 'qs';
 //此处还没有进行拦截请求和请求头加token等信息
 
 //网址的地址，方便以后更换
@@ -24,10 +26,10 @@ export const getNinePublicconnects = ()=>baseGet(pre+ctx+"getNinePublicconnect")
 export const getNincePublicActivitys = ()=>baseGet(pre+ctx+"getNinePublicactivity")
 
 //获取全部内容
-export const getAnnouncementList =()=>baseGet();  //获取全部公告
-export const getGoodthingsList =()=>baseGet(); //获取全部好人好事
-export const getPublicconnectList = ()=>baseGet(); //获取全部公益连接
-export const getPublicactivityList = ()=>baseGet(); //获取全部公益活动
+export const getAnnouncementList =()=>baseGet(pre+ctx+"getAllAnnouncement");  //获取全部公告
+export const getGoodthingsList =()=>baseGet(pre+ctx+"getAllGoodthings"); //获取全部好人好事
+export const getPublicconnectList = ()=>baseGet(pre+ctx+"getAll"); //获取全部公益连接
+export const getPublicactivityList = ()=>baseGet(pre+ctx+"getAllPublicactivity"); //获取全部公益活动
 
 //获取具体内容，各个topic下面的
 export const getAnnouncementDetails = (id)=>basePost(pre+ctx+"getAnnouncementById",id); //db标识1
@@ -37,6 +39,27 @@ export const getPublicActivityDetails = (id)=>basePost(pre+ctx+"getPublicactivit
 
 //搜索接口,用于search界面的搜索功能
 export const getKeyword  = (keyword) =>basePost(pre+ctx+"getAllKeyword",keyword)
+
+//广告接口,用于展示右边两个的图片,number 是请求多少张图片
+// export const getAdImages = (number)=>basePost(pre+ctx+"getImages",number);
+export function getAdImages(params) {
+    return new Promise((resolve, reject) => {
+      axios({
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        method: "POST",
+        url: pre+ctx+"getImages",
+        data: Qs.stringify(params),
+      })
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err.data);
+        });
+    });
+  }
 
 //  //获取titlelist，其实不用获取也行..(就在data里面写死了)
 //  getTitle(){return null;},

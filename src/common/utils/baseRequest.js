@@ -1,5 +1,5 @@
 import axios from 'axios';
-import QS from 'qs';
+import Qs from 'qs'
 /**
  * get方法，对应get请求
  * @param {String} url [请求的url地址]

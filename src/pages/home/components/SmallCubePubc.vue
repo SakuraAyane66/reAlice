@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="center-left-top">
-      <div class="more"><a :href="listurl">更多</a></div>
+      <div class="more"><a @click="goToMore">更多</a></div>
       <h2 class="h2">{{ title }}</h2>
       <hr class="hr" />
       <!-- vue单页面内跳转用路由 -->
@@ -37,6 +37,10 @@ export default {
       type: String,
       default: "#",
     },
+    dbNumber:{
+      type:Number,
+      default:-1,
+    }
   },
   data() {
     return {};
@@ -45,12 +49,22 @@ export default {
   created() {},
   //写的函数
   methods: {
-    getMsg() {
-      console.log("从父组件传递来的值是", this.msg);
-    },
-    getList(){
-      console.log("从父组件传递来的list值是",this.list)
-    }
+    // getMsg() {
+    //   console.log("从父组件传递来的值是", this.msg);
+    // },
+    // getList(){
+    //   console.log("从父组件传递来的list值是",this.list)
+    // }
+     goToMore() {
+      this.$router.push({
+        name: "AllLists",
+        params: {
+          dbNumber: this.dbNumber,
+          isUrl: 1 ,  //0代表false不是url'
+          title: this.title, //传入对应标题
+        },
+      });
+    }, //跳转到更多的页面
   },
 };
 </script>

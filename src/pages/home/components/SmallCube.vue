@@ -1,14 +1,20 @@
 <template>
   <div>
     <div class="center-left-top" id="center-center">
-      <div class="more"><a :href="listurl">更多</a></div>
+      <div class="more"><a @click="goToMore">更多</a></div>
       <h2 class="h2">{{ title }}</h2>
       <hr class="hr" />
       <!-- vue单页面内跳转用路由 -->
       <ul>
         <!-- <router-link tag="li" :to="'/xianshi/'+'db='+item.db+'&id='+item.id" class="li" v-for="item of list" :key="item.id"> -->
-        <router-link tag="li" :to="{name:'Detail',query:{db:item.db,id:item.id}}" class="li" v-for="item of list" :key="item.id">   
-            {{ item.topic }}
+        <router-link
+          tag="li"
+          :to="{ name: 'Detail', query: { db: item.db, id: item.id } }"
+          class="li"
+          v-for="item of list"
+          :key="item.id"
+        >
+          {{ item.topic }}
         </router-link>
       </ul>
     </div>
@@ -25,7 +31,17 @@ export default {
     },
     list: {
       type: Array,
-      default: ["内容1", "内容2", "内容3","内容4", "内容5", "内容6","内容7", "内容8", "内容9"],
+      default: [
+        "内容1",
+        "内容2",
+        "内容3",
+        "内容4",
+        "内容5",
+        "内容6",
+        "内容7",
+        "内容8",
+        "内容9",
+      ],
     },
     urls: {
       type: Array,
@@ -35,6 +51,10 @@ export default {
       type: String,
       default: "#",
     },
+    dbNumber:{  //后续添加用于识别种类的
+      type:Number,
+      default: -1,
+    }
   },
   data() {
     return {};
@@ -43,12 +63,22 @@ export default {
   created() {},
   //写的函数
   methods: {
-    getMsg() {
-      console.log("从父组件传递来的值是", this.msg);
-    },
-    getList(){
-      console.log("从父组件传递来的list值是",this.list)
-    }
+    // getMsg() {
+    //   console.log("从父组件传递来的值是", this.msg);
+    // },
+    // getList() {
+    //   console.log("从父组件传递来的list值是", this.list);
+    // },
+    goToMore() {
+      this.$router.push({
+        name: "AllLists",
+        params: {
+          dbNumber: this.dbNumber,
+          isUrl: 0 ,  //0代表false不是url'
+          title: this.title, //传入对应标题
+        },
+      });
+    }, //跳转到更多的页面
   },
 };
 </script>
