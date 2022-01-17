@@ -101,23 +101,27 @@ export default {
           });
           break;
         case "3":
-          getGoodthingDetails(data).then((res) => {
+          getGoodthingDetails(data).then((res) => {        
             this.obj = res.data;
+            this.obj.time = tsFormat(this.obj.time);
           });
           break;
         case 3:
           getGoodthingDetails(data).then((res) => {
             this.obj = res.data;
+            this.obj.time = tsFormat(this.obj.time);
           });
           break;
         case "4":
-          getPublicActivityDetails(data).then((res) => {
+          getPublicActivityDetails(data).then((res) => { 
             this.obj = res.data;
+            this.obj.time = tsFormat(this.obj.time);
           });
           break;
         case 4:
           getPublicActivityDetails(data).then((res) => {
             this.obj = res.data;
+            this.obj.time = tsFormat(this.obj.time);
           });
           break;
         default:
@@ -126,7 +130,6 @@ export default {
       }
     },
     isGoto:function() {
-      console.log("dd")
       if (this.keyword != null && this.keyword != "") {
         this.$router.push({
           path: "/Search",
